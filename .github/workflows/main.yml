@@ -134,7 +134,7 @@ jobs:
 
   send_message:
     runs-on: ubuntu-latest
-    needs: deploy
+    needs: post_deploy_tests
     steps:
       - name: send message
         continue-on-error: true
