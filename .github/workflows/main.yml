@@ -71,7 +71,7 @@ jobs:
       - name: Check changes backend
         id: backend-modified
         run: |
-          BACKEND_MODIFIED=$(echo "${{ github.event.head_commit.modified }}" | grep "backend/")
+          BACKEND_MODIFIED=$(echo "${{ github.event.head_commit.modified }}" | grep "backend/" || true)
           echo "$BACKEND_MODIFIED"
           if [ -z "$BACKEND_MODIFIED" ]; then
             echo "backend_modified=false" >> $GITHUB_ENV
