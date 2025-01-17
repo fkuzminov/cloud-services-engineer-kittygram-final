@@ -1,6 +1,6 @@
 #!/bin/sh
 
-docker_file="docker-compose.yaml"
+docker_file="docker-compose.production.yml"
 backend_container_name="backend"
 
 sudo docker compose -f ${docker_file} down

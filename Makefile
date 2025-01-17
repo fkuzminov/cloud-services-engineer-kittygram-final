@@ -42,3 +42,6 @@ endif
 
 backend-test:
 	python $(SERVICE_DIR)/manage.py test
+
+test:
+	py.test
