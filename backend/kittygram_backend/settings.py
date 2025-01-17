@@ -9,7 +9,9 @@ SECRET_KEY = os.getenv("SECRET_KEY", get_random_secret_key())
 
 DEBUG = bool(os.getenv("DEBUG"))
 
-ALLOWED_HOSTS = list(map(lambda s: s.strip(), os.getenv("ALLOWED_HOSTS", "*").split(",")))
+ALLOWED_HOSTS = list(
+    map(lambda s: s.strip(), os.getenv("ALLOWED_HOSTS", "*").split(","))
+)
 
 STATIC_ROOT = "/app/collected_static"
 
