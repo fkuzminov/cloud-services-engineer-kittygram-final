@@ -68,8 +68,19 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USER }}
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
+      - name: Check changes backend
+        id: backend-modified
+        run: |
+          BACKEND_MODIFIED=$(echo "${{ github.event.head_commit.modified }}" | grep "backend/")
+          if [ -z "$BACKEND_MODIFIED" ]; then
+            echo "backend_modified=false" >> $GITHUB_ENV
+          else
+            echo "backend_modified=true" >> $GITHUB_ENV
+          fi
+
       - name: Push backend to DockerHub
         uses: docker/build-push-action@v4
+        if: env.backend_modified == 'true'
         with:
           context: ./backend/
           push: true
