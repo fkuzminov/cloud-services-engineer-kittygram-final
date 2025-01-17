@@ -104,3 +104,12 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           source: "docker-compose.yaml,docker-restart.sh"
           target: "."
+
+      - name: Executing remote ssh commands to deploy
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USER }}
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            sudo sh ./docker-restart.sh
