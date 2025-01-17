@@ -68,22 +68,52 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USER }}
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
+      - name: Check changes backend
+        run: |
+          BACKEND_MODIFIED=$(echo "${{ github.event.head_commit.modified }}" | grep "backend/" || true)
+          if [ -z "$BACKEND_MODIFIED" ]; then
+            echo "backend_modified=false" >> $GITHUB_ENV
+          else
+            echo "backend_modified=true" >> $GITHUB_ENV
+          fi
+
       - name: Push backend to DockerHub
         uses: docker/build-push-action@v4
+        if: env.backend_modified == 'true'
         with:
           context: ./backend/
           push: true
           tags: ${{ secrets.DOCKERHUB_USER }}/${{ env.SERVICE }}_backend:latest
 
+      - name: Check changes frontend
+        run: |
+          FRONTEND_MODIFIED=$(echo "${{ github.event.head_commit.modified }}" | grep "frontend/" || true)
+          if [ -z "$FRONTEND_MODIFIED" ]; then
+            echo "frontend_modified=false" >> $GITHUB_ENV
+          else
+            echo "frontend_modified=true" >> $GITHUB_ENV
+          fi
+
       - name: Push frontend to DockerHub
         uses: docker/build-push-action@v4
+        if: env.frontend_modified == 'true'
         with:
           context: ./frontend/
           push: true
           tags: ${{ secrets.DOCKERHUB_USER }}/${{ env.SERVICE }}_frontend:latest
 
+      - name: Check changes nginx
+        run: |
+          NGINX_MODIFIED=$(echo "${{ github.event.head_commit.modified }}" | grep "nginx/" || true)
+          if [ -z "$NGINX_MODIFIED" ]; then
+            echo "nginx_modified=false" >> $GITHUB_ENV
+          else
+            echo "nginx_modified=true" >> $GITHUB_ENV
+          fi
+
       - name: Push gateway to DockerHub
         uses: docker/build-push-action@v4
+        if: env.nginx_modified == 'true'
         with:
           context: ./nginx/
           push: true
