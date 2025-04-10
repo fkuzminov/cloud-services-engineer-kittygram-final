@@ -112,7 +112,7 @@ jobs:
           username: ${{ secrets.USER }}
           key: ${{ secrets.SSH_KEY }}
           script: |
-            sudo sh ./docker-restart.sh
+            sh ./docker-restart.sh
 
   post_deploy_tests:
     runs-on: ubuntu-latest
