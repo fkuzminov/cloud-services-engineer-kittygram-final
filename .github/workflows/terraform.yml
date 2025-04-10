@@ -21,6 +21,7 @@ jobs:
       TF_VAR_yc_user: ${{ secrets.YC_USER }}
       TF_VAR_yc_s3_bucket_name: ${{ secrets.YC_S3_BUCKET_NAME }}
       TF_VAR_yc_ssh_public_key: ${{ secrets.YC_SSH_PUBLIC_KEY }}
+      TF_VAR_yc_zone: "ru-central1-a"
 
     steps:
       - name: Checkout repository
@@ -37,10 +38,7 @@ jobs:
 
       - name: Terraform Init
         working-directory: ./infra
-        run: terraform init \
-          -var="cloud_id=${{ secrets.YC_CLOUD_ID }}" \
-          -var="folder_id=${{ secrets.YC_FOLDER_ID }}" \
-          -var="zone=ru-central1-a"
+        run: terraform init
 
       - name: Terraform Plan
         working-directory: ./infra
