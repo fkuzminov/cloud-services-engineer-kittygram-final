@@ -1,0 +1,12 @@
+#cloud-config
+package_update: true
+package_upgrade: true
+
+packages:
+  - docker.io
+  - docker-compose
+
+runcmd:
+  - usermod -aG docker ${vm_user}
+  - systemctl enable docker
+  - systemctl start docker
