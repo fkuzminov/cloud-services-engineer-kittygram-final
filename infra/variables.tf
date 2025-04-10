@@ -14,11 +14,6 @@ variable "yc_user" {
   default     = "user"
 }
 
-variable "yc_s3_bucket_name" {
-    description   = "Yandex Cloud S3 bucket for Terraform state"
-    type          = string
-}
-
 variable "yc_zone" {
   description   = "Zone for Yandex Cloud"
   type          = string

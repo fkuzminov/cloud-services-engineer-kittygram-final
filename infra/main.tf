@@ -10,7 +10,7 @@ terraform {
     endpoints = {
       s3 = "https://storage.yandexcloud.net"
     }
-    bucket = var.yc_s3_bucket_name
+    bucket = "vm-terraform-bucket"
     region = "ru-central1"
     key    = "tf-state.tfstate"
 
