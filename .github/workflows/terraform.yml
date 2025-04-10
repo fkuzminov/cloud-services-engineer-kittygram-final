@@ -33,7 +33,7 @@ jobs:
 
       - name: Configure YC authentication
         working-directory: ./infra
-        run: echo '${{ secrets.SERVICE_ACCOUNT_KEY_FILE }}' > ./service_account_key_file.json
+        run: echo '${{ secrets.SERVICE_ACCOUNT_KEY_FILE }}' > service_account_key_file.json
 
       - name: Terraform Init
         working-directory: ./infra
