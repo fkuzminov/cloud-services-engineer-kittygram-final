@@ -36,6 +36,7 @@ jobs:
         run: echo '${{ secrets.SERVICE_ACCOUNT_KEY_FILE }}' > service_account_key_file.json
 
       - name: Check
+        working-directory: ./infra
         run: ls & cat service_account_key_file.json
 
       - name: Terraform Init
