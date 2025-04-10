@@ -7,7 +7,7 @@ defaults:
 on:
   push:
     branches:
-    - master
+    - main
 
 env:
   SERVICE: kittygram
